@@ -133,16 +133,6 @@ chekFunc()
 // Использовать оператор return
 
 // Реализовать функцию используя function declaration
-var name = 'Alex'
-var say = 'Hi'
-
-function sayHi(name, say) {
-	console.log(`${name}, ${say}`)
-}
-
-sayHi(name, say)
-
-// Реализовать функцию используя function declaration
 // Использовать оператор return
 var name = 'Alex'
 var say = 'Hi'
