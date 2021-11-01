@@ -42,11 +42,10 @@ console.log(x)
 // Реализовать с помощью цикла for
 // Реализовать с помощью цикла while
 
-// Реализовать с помощью цикла for
 var x = [45, '246', 73, '4', 15, 36, 17, 89, '49', 167, 123]
 var n = 0
 for (var i = 0; i < x.length; i++) {
-	if (x[i] % 3 === 0 && x[i] !== String(x[i])) {
+	if (x[i] % 3 === 0) {
 		n++
 	}
 }
@@ -56,13 +55,14 @@ if (n > 0) {
 	console.log(`В данном массиве нет чисел кратных 3`)
 }
 
+
 // Реализовать с помощью цикла while
 var x = [45, '246', 73, '4', 15, 36, 17, 89, '49', 167, 123]
 var n = 0
 var i = 0
 while (i < x.length) {
 	i++
-	if (x[i] % 3 === 0 && x[i] !== String(x[i])) {
+	if (x[i] % 3 === 0) {
 		n++
 	}
 }
@@ -71,6 +71,7 @@ if (n > 0) {
 } else {
 	console.log(`В данном массиве нет чисел кратных 3`)
 }
+
 
 //===============================================================================================================//
 
@@ -97,25 +98,25 @@ function chekFunc() {
 		if (typeof array[i] === 'string') {
 			arrayString++
 		}
-		if (typeof array[i] === 'number') {
+		else if (typeof array[i] === 'number') {
 			arrayNumber++
 		}
-		if (typeof array[i] === 'boolean') {
+		else if (typeof array[i] === 'boolean') {
 			arrayBoolean++
 		}
-		if (typeof array[i] === 'null') {
+		else if (array[i] === null) {
 			arrayNull++
 		}
-		if (typeof array[i] === 'object') {
+		else if (typeof array[i] === 'object') {
 			arrayObject++
 		}
 	}
 	console.log(`
-     String: ${arrayString}
-	 Number: ${arrayNumber}
-	 Boolean: ${arrayBoolean}
-	 Null: ${arrayNull}
-	 Object: ${arrayObject}
+		String: ${arrayString}
+		Number: ${arrayNumber}
+		Boolean: ${arrayBoolean}
+		Null: ${arrayNull}
+		Object: ${arrayObject}
   `)
 }
 
@@ -131,6 +132,16 @@ chekFunc()
 // Реализовать функцию используя function declaration
 // Реализовать функцию используя function expression
 // Использовать оператор return
+
+// Реализовать функцию используя function declaration
+var name = 'Alex'
+var say = 'Hi'
+
+function sayHi(name, say) {
+	console.log(`${name}, ${say}`)
+}
+
+sayHi(name, say)
 
 // Реализовать функцию используя function declaration
 // Использовать оператор return

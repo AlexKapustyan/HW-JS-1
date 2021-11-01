@@ -15,13 +15,14 @@ var user = {
 	name: 'Alex'
 }
 
-user.sayHello = function (messege = 'Hello') {
-	if (user.name !== undefined && user.name.length !== 0 && user.name === user.name.toString()) {
+user.sayHello = function (messege = 'Добрый день') {
+	if (user.name) {
 		console.log(`${messege}, ${this.name}`)
 	} else {
 		console.log('Имя пользователя не указано')
 	}
 }
+
 user.sayHello()
 
 
@@ -70,10 +71,30 @@ product.priceAddPresent()
 // Маша: Спорт, Литература, Биология, География
 // Денис: Литература, Биология, География
 
-function showStudentsFavoriteLessons() {
-	var lessons = ['Математика', 'История', 'Спорт', 'Литература', 'Биология', 'География']
 
-	function checkStudentFavoriteLessons() {
 
+
+var showStudentsFavoriteLessons = function (...student) {
+	var lessons = ['Математика', 'История', 'Спорт', 'Литература', 'Биология', 'География']  //Пока не решил
+
+
+	var checkStudentFavoriteLessons = function () {
+		if (lessons.length === 0) {
+			return console.log(`У этого студента нет любимых предметов`)
+		}
+
+		var n = Math.floor(Math.random() * lessons.length);
+		var favoriteLessons = lessons.slice(n)
+		for (var i = 0; i < lessons.length; i++) {
+			if (typeof lessons[i] === 'string') {
+				return console.log(favoriteLessons)
+			} else {
+				return console.log(`У этого студента нет любимых предметов`)
+			}
+		}
 	}
+	console.log(`${student}: ${checkStudentFavoriteLessons()}`)
 }
+showStudentsFavoriteLessons("Артур", "Жуня", "Костя", "Маша", "Денис")
+
+

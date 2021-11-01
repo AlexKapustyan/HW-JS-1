@@ -7,23 +7,39 @@
 // Пример аргументов:
 // Null, 123, ‘JS’, [‘Nastya’, ‘Dima’, ‘Max’, ‘Masha’], undefined, {}, true, [‘Sasha’, ‘Denis’, ‘Marina’]
 
-function manyArguments() {
-	var array  
-	if (array === []) {
-		for (var i = 0; i < array.length; i++) {
-			if (Array.isArray(arguments[i])) {
-				array = array.concat(arguments[i])
-				console.log(array)
-		  }
+function argum(arguments) {
+	var array = []
+	for (var i = 0; i < arguments.length; i++) {
+		if (Array.isArray(arguments)) {
+			var newArray = array.concat(arguments)
+			return newArray
 		}
-
-		array.unshift('Start')
-		array.push('The End')
-		array.reverse()
-      return array
 	}
 }
-manyArguments()	
+
+
+
+
+
+
+
+
+
+
+
+function argum(...arg) { //не получается добавить 2-й массивf
+	var array = []
+	for (var i = 0; i < arguments.length; i++) {
+		if (Array.isArray(arguments[i])) {
+			var newArray = array.concat(arguments[i])
+			newArray.unshift('Start')
+			newArray.push('The End')
+			return newArray.reverse()
+		}
+	}
+}
+
+argum(Null, 123, 'JS', ['Nastya', 'Dima', 'Max', 'Masha'], undefined, {}, true, ['Sasha', 'Denis', 'Marina'])
 
 
 
@@ -36,6 +52,23 @@ manyArguments()
 // [73, 4, 11, 234, 58, 134]
 // ['js', 'css', 'jq’, ‘html’, ‘vue’, ‘bootstrap’]
 
+function checkLengthArray() {
+	var arrayFirst = [73, 4, 11, 234, 58, 134]
+	var arrraySecond = ['js', 'css', 'jq', 'html', 'vue', 'bootstrap']
+	if (arrayFirst.length === arrraySecond.length) {
+		arrayFirst.sort(function (a, b) {
+			return newArray = a - b
+		})
+	} else {
+		return ('Массивы имеют разную длину')
+	}
+	var middleEl = arrayFirst[Math.floor(arrayFirst.length / 2)]
+	arrayFirst.indexOf(middleEl)
+	for (var i = 0; i < arrraySecond.length; i++) {
+		arrayFirst.splice(arrayFirst.indexOf(middleEl), 0, arrraySecond[i])
+	}
+	return arrayFirst
+}
 
 
 
@@ -46,6 +79,20 @@ manyArguments()
 // Написать функцию, которая принимает в качестве аргумента строку произвольной длины и число (n) – до какого символа обрезать строку.
 // Реализуйте сравнение длины строки и переданного вторым аргументом числа. Если длина строки превышает n, то вернуть строку, состоящую из первых n символов строки и добавить троеточия в конце. Если меньше, вернуть начальную строку, в которой, заменены все пробелы на “-” и первая и последняя буквы являются заглавными.
 
+function comparisonOfStringLength(String, Number) {
+	var string = String
+	var n = Number
+
+	if (string.length > n) {
+		var str = string.substring(0, n)
+		console.log(`${str}...`)
+	} else {
+		var str2 = string[0].toUpperCase() + string.slice(1);
+		var str3 = str2.slice(0, - 1) + str2.slice(-1).toUpperCase()
+		str4 = str3.replace(/ /gi, "-")
+		return str4
+	}
+}
 
 
 
@@ -58,3 +105,7 @@ manyArguments()
 // Substr
 // Substring
 // Slice
+
+function func(phrase, word) {  //пока нерешил
+
+}
