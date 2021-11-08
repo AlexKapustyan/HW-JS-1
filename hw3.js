@@ -7,40 +7,22 @@
 // Пример аргументов:
 // Null, 123, ‘JS’, [‘Nastya’, ‘Dima’, ‘Max’, ‘Masha’], undefined, {}, true, [‘Sasha’, ‘Denis’, ‘Marina’]
 
-function argum(arguments) {
+function argum(...arg) {
+	var arrArg = Array.from(arg)
 	var array = []
-	for (var i = 0; i < arguments.length; i++) {
-		if (Array.isArray(arguments)) {
-			var newArray = array.concat(arguments)
-			return newArray
+	for (var i = 0; i < arrArg.length; i++) {
+		if (Array.isArray(arrArg[i])) {
+			array.push(arrArg[i])
+			var arrayResult = array.flat()
+			arrayResult.unshift('Start')
+			arrayResult.push('The End')
+			arrayResult.reverse()
 		}
 	}
+	return console.log(arrayResult)
 }
 
-
-
-
-
-
-
-
-
-
-
-function argum(...arg) { //не получается добавить 2-й массивf
-	var array = []
-	for (var i = 0; i < arguments.length; i++) {
-		if (Array.isArray(arguments[i])) {
-			var newArray = array.concat(arguments[i])
-			newArray.unshift('Start')
-			newArray.push('The End')
-			return newArray.reverse()
-		}
-	}
-}
-
-argum(Null, 123, 'JS', ['Nastya', 'Dima', 'Max', 'Masha'], undefined, {}, true, ['Sasha', 'Denis', 'Marina'])
-
+argum(null, 123, 'JS', ['Nastya', 'Dima', 'Max', 'Masha'], undefined, {}, true, ['Sasha', 'Denis', 'Marina'])
 
 
 //==============================================================================================================================================================================================//
@@ -106,6 +88,21 @@ function comparisonOfStringLength(String, Number) {
 // Substring
 // Slice
 
-function func(phrase, word) {  //пока нерешил
-
+//Метод Splice
+function cutWord(phrase, word) {
+	var phrase
+	var word
+	var formatPhrase = phrase.split(' ')
+	if (formatPhrase.includes(word)) {
+		var indexWord = formatPhrase.indexOf(word)
+		formatPhrase.splice(indexWord, 1)
+		var resultPhrase = formatPhrase.join(' ')
+	}
+	return resultPhrase
 }
+
+cutWord('Hi Andru, how are you?', 'are')
+
+//Для решения задачи остальными методами все равно приходится использовать метод Splice. По крайней мере в моем случае(((
+
+

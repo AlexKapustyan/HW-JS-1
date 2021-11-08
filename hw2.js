@@ -72,29 +72,21 @@ product.priceAddPresent()
 // Денис: Литература, Биология, География
 
 
+function showStudentsFavoriteLessons(...student) {
+	var lessons = ['Математика', 'История', 'Спорт', 'Литература', 'Биология', 'География']
+	var students = Array.from(student)
 
-
-var showStudentsFavoriteLessons = function (...student) {
-	var lessons = ['Математика', 'История', 'Спорт', 'Литература', 'Биология', 'География']  //Пока не решил
-
-
-	var checkStudentFavoriteLessons = function () {
-		if (lessons.length === 0) {
-			return console.log(`У этого студента нет любимых предметов`)
-		}
-
-		var n = Math.floor(Math.random() * lessons.length);
-		var favoriteLessons = lessons.slice(n)
-		for (var i = 0; i < lessons.length; i++) {
-			if (typeof lessons[i] === 'string') {
-				return console.log(favoriteLessons)
+	function checkStudentFavoriteLessons(students) {
+		for (var i = 0; i < students.length; i++) {
+			var n = Math.floor(Math.random() * lessons.length);
+			var favoriteLessons = lessons.splice(-n)
+			if (favoriteLessons.length > 0) {
+				console.log(`${students[i]}: ${favoriteLessons}`)
 			} else {
-				return console.log(`У этого студента нет любимых предметов`)
+				console.log(`${students[i]}: У этого студента нет любимых предметов`)
 			}
 		}
 	}
-	console.log(`${student}: ${checkStudentFavoriteLessons()}`)
+	checkStudentFavoriteLessons(students)
 }
-showStudentsFavoriteLessons("Артур", "Жуня", "Костя", "Маша", "Денис")
-
-
+showStudentsFavoriteLessons('Артур', 'Жуня', 'Костя', 'Маша', 'Денис')
