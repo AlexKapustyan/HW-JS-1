@@ -49,9 +49,9 @@ var decreasingNumber = (function () {
 
 function recursSum(arr, sum) {
 	sum = sum || 0
-    return arr.length ? recursSum(arr, sum + arr.pop()) : sum
+	return arr.length ? recursSum(arr, sum + arr.pop()) : sum
 }
-recursSum([1,2])
+recursSum([1, 2])
 
 
 //==============================================================================================================================================================================================//
@@ -60,7 +60,16 @@ recursSum([1,2])
 // Напишите функцию, которая в качестве аргументов принимает два числа. Первое число – начало диапазона. Второе число – конец диапазона. Вернуть строку всех целых чисел из этого диапазона через запятую.
 // Реализовать с помощью рекурсии
 
+function rangeNum(first, last) {
+	var num = []
+	if (first - last === 0) {
+		return [first]
+	} else {
+		return (num = rangeNum(first + 1, last), num.unshift(first))
+	}
+};
 
+rangeNum(5, 10)
 
 //==============================================================================================================================================================================================//
 
@@ -68,8 +77,17 @@ recursSum([1,2])
 // Напишите функцию, которая принимает массив из последовательности чисел и возвращает максимальное число.
 // Реализовать с помощью рекурсии
 
+function getMaxOfArray(numArray) {
+	if (numArray === 0) {
+		return numArray
+	} else {
+		return Math.max.apply(null, numArray);
+	}
+}
 
+getMaxOfArray([1, 2, 3])
 
+//==============================================================================================================================================================================================//
 
 // Задача №7
 // Создать объект пользователя со следующими полями:
@@ -81,6 +99,29 @@ recursSum([1,2])
 // сеттер fullName - устанавливает значения в поля firstName и lastName
 // геттер age - возвращает количество лет от даты указанной в birthday, до текущего дня.
 // сеттер age - изменяет год в поле birthday, вычисляя это значение из текущего года и нового значения
+
+const user = {
+	firstName: 'Alex',
+	lastName: 'Kapustian',
+	birthday: '2.10.85',
+	get fullName() {
+		return (`${this.firstName} ${this.lastName}`)
+	},
+	set fullName(newName) {
+		this.firstName = newName.substring(0, newFullName.indexOf(' '));
+		this.lastNamee = newName.substring(newFullName.indexOf(' '));
+	},
+	get age() {
+		var year = new Date().getFullYear();
+		return (+year) - (+this.birthday.substr(-4, 4));
+	},
+	set age(newAge) {
+		var year = new Date().getFullYear();
+		this.birthday = this.birthday.substring(0, 6).concat(+year - (+newAge));
+	}
+}
+//==============================================================================================================================================================================================//
+
 // Задача №8
 // Создать объект товара со следующими полями:
 // name
@@ -90,3 +131,19 @@ recursSum([1,2])
 // Значения полей указать произвольное. Реализовать следующие геттеры и сеттеры:
 // геттер discountPrice - возвращает цену товара, уменьшенную на количество процентов указанных в поле discount
 // сеттер discountPrice - устанавливает значение поля price, увеличивая новое значение на количество процентов указанных в поле discount
+
+var product = {
+	name: 'Phone',
+	id: '1111',
+	price: 1000,
+	discount: 10,
+
+	get discountPrice() {
+		return this.price - this.price * (this.discount / 100)
+	},
+
+	set discountPrice(newPrice) {
+		return this.price = newPrice + newPrice * (this.discount / 100)
+	}
+}
+
