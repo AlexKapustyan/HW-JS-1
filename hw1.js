@@ -45,7 +45,7 @@ console.log(x)
 var x = [45, '246', 73, '4', 15, 36, 17, 89, '49', 167, 123]
 var n = 0
 for (var i = 0; i < x.length; i++) {
-	if (x[i] % 3 === 0) {
+	if (x[i] % 3) {
 		n++
 	}
 }

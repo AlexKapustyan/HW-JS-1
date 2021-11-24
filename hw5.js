@@ -4,7 +4,7 @@
 // Задача №1
 // Создайте IIFE, которое получает пароль в аргументе и возвращает внутреннюю функцию, которая в качестве аргумента принимает введенную строку и возвращает булево значение true, если введенная строка совпадает с паролем и faulse – если не совпадает. Для сохранения результата IIFE создайте переменную checkPassword.
 
-var checkPassword = (function (password = '1111') {
+var checkPassword = (function (password) {
 	return function (checkPass) {
 		if (checkPass === password) {
 			return true
@@ -12,7 +12,7 @@ var checkPassword = (function (password = '1111') {
 			return false
 		}
 	}
-})()
+})(1111)
 
 
 //==============================================================================================================================================================================================//
@@ -61,12 +61,12 @@ recursSum([1, 2])
 // Реализовать с помощью рекурсии
 
 function rangeNum(first, last) {
-	var num = []
 	if (first - last === 0) {
 		return [first]
 	} else {
-		return (num = rangeNum(first + 1, last), num.unshift(first))
+		return (first = rangeNum(first + 1, last), first.unshift(first))
 	}
+	return rangeNum
 };
 
 rangeNum(5, 10)
@@ -109,7 +109,7 @@ const user = {
 	},
 	set fullName(newName) {
 		this.firstName = newName.substring(0, newFullName.indexOf(' '));
-		this.lastNamee = newName.substring(newFullName.indexOf(' '));
+		this.lastNamee = newName.substring(newFullName.indexOf(''));
 	},
 	get age() {
 		var year = new Date().getFullYear();

@@ -30,7 +30,7 @@ function randomNumber() {
 	return function (min = 1, max = 50) {
 		min = Math.ceil(min);
 		max = Math.floor(max);
-		var num = Math.floor(Math.random() * (max - min + 1)) + min;
+		var num = Math.floor(Math.random() * 50);
 		if (!arrow.includes(num)) {
 			arrow.push(num)
 		}

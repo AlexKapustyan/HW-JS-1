@@ -45,7 +45,7 @@ var product = {
 	price: 1000,
 
 
-	priceAddPresent: function (present = 10) {
+	priceAddPresent(present = 10) {
 		console.log(this.price + (this.price * present / 100))
 	}
 }
