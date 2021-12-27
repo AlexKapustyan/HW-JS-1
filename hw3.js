@@ -34,9 +34,8 @@ argum(null, 123, 'JS', ['Nastya', 'Dima', 'Max', 'Masha'], undefined, {}, true, 
 // [73, 4, 11, 234, 58, 134]
 // ['js', 'css', 'jq’, ‘html’, ‘vue’, ‘bootstrap’]
 
-function checkLengthArray() {
-	var arrayFirst = [73, 4, 11, 234, 58, 134]
-	var arrraySecond = ['js', 'css', 'jq', 'html', 'vue', 'bootstrap']
+function checkLengthArray(arrayFirst, arrraySecond) {
+
 	if (arrayFirst.length === arrraySecond.length) {
 		arrayFirst.sort(function (a, b) {
 			return newArray = a - b
@@ -52,6 +51,8 @@ function checkLengthArray() {
 	return arrayFirst
 }
 
+checkLengthArray([73, 4, 11, 234, 58, 134], ['js', 'css', 'jq', 'html', 'vue', 'bootstrap'])
+
 
 
 //==============================================================================================================================================================================================//
@@ -62,8 +63,8 @@ function checkLengthArray() {
 // Реализуйте сравнение длины строки и переданного вторым аргументом числа. Если длина строки превышает n, то вернуть строку, состоящую из первых n символов строки и добавить троеточия в конце. Если меньше, вернуть начальную строку, в которой, заменены все пробелы на “-” и первая и последняя буквы являются заглавными.
 
 function comparisonOfStringLength(string, number) {
-	var string = String
-	var n = Number
+	var string = string
+	var n = number
 
 	if (string.length > n) {
 		var str = string.substring(0, n)
@@ -88,21 +89,44 @@ function comparisonOfStringLength(string, number) {
 // Substring
 // Slice
 
-//Метод Splice
-function cutWord(phrase, word) {
-	var phrase
-	var word
-	var formatPhrase = phrase.split(' ')
-	if (formatPhrase.includes(word)) {
-		var indexWord = formatPhrase.indexOf(word)
-		formatPhrase.splice(indexWord, 1)
-		var resultPhrase = formatPhrase.join(' ')
-	}
-	return resultPhrase
-}
-
+//Метод  Substr
 cutWord('Hi Andru, how are you?', 'are')
 
-//Для решения задачи остальными методами все равно приходится использовать метод Splice. По крайней мере в моем случае(((
+	function cutWord(phrase, word) {
+		if (phrase.includes(word)) {
+			var indexWord = phrase.indexOf(word);
+			return phrase.substr(0, indexWord) + phrase.substr(indexWord + (word.length + 1));
+		} else {
+			return `${phrase}: ${word}`;
+		}
+	}
+	
+
+//Метод  Substring
+cutWord('Hi Andru, how are you?', 'are')
+
+function cutWord(phrase, word) {
+	if (phrase.includes(word)) {
+		var indexWord = phrase.indexOf(word);
+		return phrase.substring(0, indexWord) + phrase.substring(indexWord + (word.length + 1));
+	} else {
+		return `${phrase}: ${word}`;
+	}
+}
+
+
+
+//Метод  Slice
+cutWord('Hi Andru, how are you?', 'are')
+
+	function cutWord(phrase, word) {
+		if (phrase.includes(word)) {
+			var indexWord = phrase.indexOf(word);
+			return phrase.slice(0, indexWord) + phrase.slice(indexWord + (word.length + 1));
+		} else {
+			return `${phrase}: ${word}`;
+		}
+	}
+
 
 

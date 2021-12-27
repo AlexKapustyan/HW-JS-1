@@ -4,15 +4,14 @@
 // Задача №1
 // Создайте IIFE, которое получает пароль в аргументе и возвращает внутреннюю функцию, которая в качестве аргумента принимает введенную строку и возвращает булево значение true, если введенная строка совпадает с паролем и faulse – если не совпадает. Для сохранения результата IIFE создайте переменную checkPassword.
 
-var checkPassword = (function (password) {
+var password = '1111'
+
+var checkPassword = (function (pas) {
 	return function (checkPass) {
-		if (checkPass === password) {
-			return true
-		} else {
-			return false
-		}
+		return checkPass === pas
 	}
-})(1111)
+})(password)
+console.log(checkPassword(prompt('Введите пароль')))
 
 
 //==============================================================================================================================================================================================//
@@ -20,25 +19,24 @@ var checkPassword = (function (password) {
 // Задача №2
 // Создайте IIFE, которое получает число n (начальное значение) в качестве аргумента родительской функции и возвращает функцию, которая получает число, прибавляет его к n, которое находится в замыкании, и возвращает результат. Для сохранения результата IIFE создайте переменную addeter.
 
-var addeter = (function (n) {
-	n = 10
+var addeter = ((function (n) {
 	return function (number) {
-		return number + n
+		return n + number
 	}
-})()
+})(+prompt('Введите число (n)')))
 
+console.log(addeter(+prompt('Введите 2-е число ')))
 
 //==============================================================================================================================================================================================//
 
 // Задача №3
 // Создайте IIFE, которое вернёт функцию, у которой в замыкании будет переменная counter со значением 10. Сделайте так, чтобы каждый вызов возвращённой функции уменьшал это число на 1 и выводил на экран уменьшенное число. Добавьте функционал, чтобы отсчет доходил до 0, а затем каждый последующий вызов функции выводил на экран сообщение о том, что отсчет окончен.
-
-var decreasingNumber = (function () {
-	var counter = 10
+var counter = 10
+var decreasingNumber = (function () {	
 	return function () {
 		return counter > 0 ? counter-- : console.log('отсчет окончен')
 	}
-})()
+})(counter)
 
 
 //==============================================================================================================================================================================================//
@@ -71,6 +69,30 @@ function rangeNum(first, last) {
 
 rangeNum(5, 10)
 
+
+
+var first = 5
+var last = 10
+
+console.log('First is:')
+console.log(first)
+console.log('Lastis:')
+console.log(last)
+console.log('Gap is:')
+console.log(getGap(first, last))
+
+function getGap(first, last, gap) {
+  if (first > last) {
+    return 'Wrong'
+  }
+  gap = gap ? gap : ''
+  if (first < last) {
+		gap += first++ + ', '
+    return getGap(first, last, gap)
+  }
+  return gap + last
+}
+
 //==============================================================================================================================================================================================//
 
 // Задача №6
@@ -100,26 +122,52 @@ getMaxOfArray([1, 2, 3])
 // геттер age - возвращает количество лет от даты указанной в birthday, до текущего дня.
 // сеттер age - изменяет год в поле birthday, вычисляя это значение из текущего года и нового значения
 
-const user = {
+var user = {
 	firstName: 'Alex',
 	lastName: 'Kapustian',
-	birthday: '2.10.85',
+	birthday: new Date(1985, 10, 2),
+
 	get fullName() {
-		return (`${this.firstName} ${this.lastName}`)
+			return `${this.firstName} ${this.lastName}`
 	},
-	set fullName(newName) {
-		this.firstName = newName.substring(0, newFullName.indexOf(' '));
-		this.lastNamee = newName.substring(newFullName.indexOf(''));
+
+	set fullName(fullName) {
+			[this.firstName, this.lastName] = fullName.split(" ")
 	},
+
 	get age() {
-		var year = new Date().getFullYear();
-		return (+year) - (+this.birthday.substr(-4, 4));
+			var now = new Date()
+			var dateNowWithoutTime = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+			var birthdayThisYearWithoutTime = new Date(now.getFullYear(), this.birthday.getMonth(), this.birthday.getDate())	
+			var age = now.getFullYear() - this.birthday.getFullYear()	
+			if (dateNowWithoutTime < birthdayThisYearWithoutTime) {
+					age--
+			}
+
+			return age
 	},
-	set age(newAge) {
-		var year = new Date().getFullYear();
-		this.birthday = this.birthday.substring(0, 6).concat(+year - (+newAge));
+
+	set age(age) {
+			var now = new Date()
+			var birthdayYear = now.getFullYear() - age
+
+			var dateNowWithoutTime = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+			var birthdayThisYearWithoutTime = new Date(now.getFullYear(), this.birthday.getMonth(), this.birthday.getDate())
+			if (dateNowWithoutTime < birthdayThisYearWithoutTime) {
+					birthdayYear--
+			}
+
+			this.birthday.setFullYear(birthdayYear)
 	}
 }
+
+console.log(user.fullName)
+user.fullName = 'Max Ivanov'
+console.log(user.fullName)
+
+console.log(user.age)
+user.age = 10
+console.log(user.age)
 //==============================================================================================================================================================================================//
 
 // Задача №8

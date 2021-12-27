@@ -11,17 +11,48 @@
 // multiplyValues() возвращает произведение введенных свойств.
 // Сделать проверку в методах sumValues и multiplyValues на наличие чисел, если хотя бы одно число не указано, выводить в консоль сообщение ‘Числа не заданы’.
 
-var obj = {
-	firstOperand: null,
-	secondOperand: null,
-	setValues(){},
-	sumValues(){},
-	multiplyValues(){}
+operator = {
+	firstOperand: 0,
+	secondOperand: 0,
+
+	setValues() {
+			this.firstOperand = +prompt('Введите первое число')
+			this.secondOperand = +prompt('Введите второе число')
+	},
+
+	sumValues() {
+			if (this.checkOperands()) {
+					return this.firstOperand + this.secondOperand
+			}
+	},
+
+	multiplyValues() {
+			if (this.checkOperands()) {
+					return this.firstOperand * this.secondOperand
+			}
+	},
+
+	checkOperands() {
+			if (isNaN(this.firstOperand) || isNaN(this.secondOperand) || !(this.firstOperand) || !(this.secondOperand)){
+					console.log('Числа не установлены')
+					return false
+			}
+			return true
+	}
 }
+
+operator.setValues()
+
+console.log('Сумма чисел равна:')
+console.log(operator.sumValues())
+
+console.log('Произведение чисел:')
+console.log(operator.multiplyValues())
 
 
 
 //==============================================================================================================================================================================================//
+
 // Задача №2
 // Написать функцию-конструктор calculatorMaker. При вызове как конструктор функция calculatorMaker в качестве аргументов должна принимать 2 числа (первый аргумент – начальное значение первого операнда, второй аргумент – начальное значение второго операнда, дефолтное значение которых равняется 0) и возвращать объект со следующими полями:
 // firstOperand
@@ -47,3 +78,58 @@ var obj = {
 // Метод showHistory – сделать унаследованным и реализовать следующую логику работы функции.
 // Метод должен выводить в консоль сообщение ‘Список операций, выполненный этим экземпляром: ’ и далее выводит в консоль все сообщения из массива history, каждый элемент с новой строки.
 // Если в массив history пуст, то выводить в консоль следующее сообщение: ‘Список операций – пуст’.
+
+
+function CalculatorMaker(firstOperand = 0, secondOperand = 0) {
+	this.firstOperand = typeof(firstOperand) === 'number' ? firstOperand : 0
+	this.secondOperand = typeof(secondOperand) === 'number' ? secondOperand : 0
+	this.history = []
+
+	this.addition = function () {
+			this.log(`${this.firstOperand} + ${this.secondOperand}`)
+			return this.firstOperand + this.secondOperand
+	}
+
+	this.subtraction = function () {
+			this.log(`${this.firstOperand} - ${this.secondOperand}`)
+			return this.firstOperand - this.secondOperand
+	}
+
+	this.multiplication = function () {
+			this.log(`${this.firstOperand} * ${this.secondOperand}`)
+			return this.firstOperand * this.secondOperand
+	}
+
+	this.division = function () {
+			this.log(`${this.firstOperand} / ${this.secondOperand}`)
+			return this.secondOperand !== 0
+					? this.firstOperand / this.secondOperand
+					: 'На 0 делить нельзя'
+	}
+
+	this.log = function (message) {
+			if (message.length) {
+					this.history.push(message)
+			}
+	}
+
+	this.showHistory = function () {
+			if (this.history.length) {
+					this.history.forEach(historyItem => console.log(historyItem))
+			}
+			else {
+					console.log('Список операций пуст')
+			}
+	}
+}
+
+var calculator = new CalculatorMaker(5, 2)
+
+console.log('Результаты операций:')
+console.log(calculator.addition())
+console.log(calculator.subtraction())
+console.log(calculator.multiplication())
+console.log(calculator.division())
+
+console.log('Список операций:')
+calculator.showHistory()

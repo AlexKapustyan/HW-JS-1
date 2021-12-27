@@ -6,6 +6,11 @@
 // Переменная счётчика должна быть внутри функции
 // Реализовать с помощью замыкания
 
+var funClosure = closure();
+console.log(funClosure());
+console.log(funClosure());
+console.log(funClosure());
+
 function closure() {
 	var i = 0
 	return function () {

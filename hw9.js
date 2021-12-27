@@ -161,6 +161,38 @@ function uniteArray(arr) {
 // Задача №9
 // Напишите функцию, которая в качестве аргументов принимает массив элементов и число. Функция должна возвращать массив с массивами из  элементов переданного массива. Длина внутренних массивов должна быть равной числу, переданному в качестве аргумента. Если длина исходного массива не кратна переданному числу, то оставшиеся элементы также поместить в массив.
 
+const startedArray = [1, 'hello', 2, 7, 11, 'hello', 0, 7,'hello', 7]
+        const elemQuantity = 4
+        console.log(`Base array: ${startedArray}`)
+        console.log(getArrayInArray(startedArray, elemQuantity))
+
+        function getArrayInArray(baseArray, elemQuantity) {
+            let sortedArray = []
+
+            if (baseArray.length < elemQuantity) {
+               return `The base array length is less than required elements quantity`
+            }
+            for (let i = 0; i < baseArray.length; i += elemQuantity) {
+               sortedArray.push(baseArray.slice(i, i + elemQuantity));
+            }
+
+            return sortedArray
+        }
+
+        console.log('Task-9.2')
+        console.log(getArrayInArray2(startedArray, elemQuantity))
+
+        function getArrayInArray2(baseArray, elemQuantity) {
+            let sortedArray = []
+
+            while (baseArray.length > 0) {
+                sortedArray.push(baseArray.splice(0, elemQuantity))
+            }
+
+            return sortedArray
+        }
+
+
 
 
 //==============================================================================================================================================================================================//

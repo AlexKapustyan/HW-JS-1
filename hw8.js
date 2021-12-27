@@ -4,6 +4,30 @@
 // Реализовать с помощью setInterval
 // Реализовать с помощью setTimeout вместо setInterval
 
+setTimeout
+(function() {
+  let i = 1
+
+  setTimeout(function run() {
+    console.log(i)
+    if (i < 20 ) {
+      setTimeout(run, 1000)
+      i++
+    }
+  }, 1000)
+})()
+
+
+setInterval
+(function interval() {
+  let i = 1
+
+  setInterval(function run() {
+    if(i <= 20) console.log(i)
+    i++
+  }, 1000)
+})()
+
 //========================================================================================//
 
 // Задача №2
@@ -50,12 +74,85 @@ traficLight(2, 2, 2, 12)
 
 // Задача №3
 // Напишите функцию, которая через prompt, предлагает пользователю сделать ставку (ввести сумму денег, типа ставка на спорт), после ввода числа в prompt, выведите в консоль сообщение ‘Ваша ставка принята’. Сгенерируйте случайное число в диапазоне от -5 до 5. Через 3 секунды выведите сообщение в консоль информацию о том, что он “выиграл” или “проиграл” с такой логикой: если случайное число отрицательное или равно 0 - то он "не угадал" со своей ставкой, выведите в консоль сообщение ‘Вы проиграли. Ваши деньги сгорели.’ Если число положительное, то выведите в консоль сообщение ‘Вы выиграли. Ваш выигрыш составляет { сумма выигрыша }’. Для расчёта суммы выигрыша нужно умножить сумму ставки на случайно сгенерированное число в диапазоне от -5 до 5.
+
+function casino() {
+	const sportsBet = Number(prompt('Cделайте вашу ставку'))
+	if (isNaN(sportsBet) || Math.sign(sportsBet) < 0) {
+		return console.log('Нужно указать положительное число!')
+	 } else {
+			console.log('Ваша ставка принята!')
+	 }
+
+	function randomInteger(min, max) {
+		let rand = min + Math.random() * (max + 1 - min);
+		return Math.floor(rand);
+	}
+
+	setTimeout(() => {
+		randomInteger(-5, 5) <= 0 ? console.log('Вы проиграли. Ваши деньги сгорели.') : console.log(`Вы выиграли. Ваш выигрыш составляет ${randomInteger(-5, 5) * sportsBet}`)
+	}, 3000)
+}
+
+casino()
+
+//====================================================================================================================================================//
+
 // Задача №4
 // Написать конструктор studentsCreator, потомки которого должны иметь собственное свойство attendedСlassesList, массив в котором будет храниться список посещений, и следующие унаследованные свойства:
 // setStudentPresent – метод, который принимает дату в формате '2013-03-25' в качестве единственного формального параметра. Этот метод позволяет указать присутствие студента на занятии в определенную дату. Метод должен создавать объект Date и устанавливать в нём день, месяц и год используя строку из аргумента, все остальные значения даты нужно установить в ноль, привести получившийся объект Date к числу равному количеству миллисекунд, прошедших с начала 1970 года до этого числа, запушить это значение в массив attendedСlassesList и вывести в консоль сообщение ‘Студент был успешно отмечен’. Если это значение уже есть в массиве, вывести в консоль сообщение об этом и не пушить этот элемент в массив ещё раз и выводить сообщение в консоль ‘Студент уже был отмечен на эту дату’.
 // setStudentTodayPresent - метод, который должен создавать новый объект Date с сегодняшней датой, все остальные значения даты нужно установить в ноль, привести получившийся объект Date к числу равному количеству миллисекунд, прошедших с начала 1970 года до этого числа и запушить это значение в массив и вывести в консоль сообщение ‘Студент был успешно отмечен’. Если это значение уже есть в массиве, вывести в консоль сообщение об этом и не пушить этот элемент в массив ещё раз и выводить сообщение в консоль ‘Студент уже был отмечен на эту дату’. (не принимает аргументов)
 // Метод checkAttendInDate – метод, который принимает дату в формате '2013-03-25', приводит к числу равному количеству миллисекунд, прошедших с начала 1970 года до этого числа, и проверяет наличие данного значения в массиве attendedСlassesList. Возвращает true/false.
 // Метод showAllVisits – выводит в консоль сообщение ‘Список дат посещения занятий:’ и с новой строки все записи из массива attendedСlassesList в формате ISO (каждый элемент на новой строке).
+
+function StudentsCreator(){
+  this.attendedСlassesList = []
+ }
+
+ StudentsCreator.prototype.setStudentPresent = function(date){
+  let datePresent =  new Date (date);
+  datePresent.setHours(0,0,0,0);
+  datePresent.setDate(datePresent.getDate()+1)
+  const datePresentMs = datePresent.getTime()
+  if (!this.attendedСlassesList.indexOf(datePresentMs)){
+    console.log('Студент уже был отмечен на эту дату')
+  }
+  else{ this.attendedСlassesList.push(datePresentMs);
+ console.log('Студент был успешно отмечен')}
+}
+
+StudentsCreator.prototype.setStudentTodayPresent = function(){
+  let newDate = new Date();
+   newDate.setHours(0,0,0,0);
+   newDate.setDate(newDate.getDate()+1)
+   let newDateMs = newDate.getTime()
+   if (!this.attendedСlassesList.indexOf(newDateMs)){
+    console.log('Студент уже был отмечен на эту дату')
+  }
+   else{ this.attendedСlassesList.push(newDateMs);
+   console.log('Студент был успешно отмечен')}
+}
+
+StudentsCreator.prototype.checkAttendInDate = function(dateCheck){
+  let newDateCheck =  new Date(dateCheck);
+  newDateCheck.setHours(0,0,0,0);
+  newDateCheck.setDate(newDateCheck.getDate()+1)
+  let newDateCheckMs = newDateCheck.getTime();
+   if (!this.attendedСlassesList.indexOf(newDateCheckMs)){
+    console.log(1)
+  }
+   else{ this.attendedСlassesList.push(newDateCheckMs);
+   console.log(0)}
+}
+
+
+
+StudentsCreator.prototype.showAllVisits = function(){
+  console.log(`Список дат посещения занятий:`)
+  this.attendedСlassesList.forEach(function(array_item, index) {
+        let dateArr =new Date(array_item).toISOString();
+        console.log(dateArr);
+    })
+  }
 
 //================================================================//
 

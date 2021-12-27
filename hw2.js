@@ -71,22 +71,21 @@ product.priceAddPresent()
 // Маша: Спорт, Литература, Биология, География
 // Денис: Литература, Биология, География
 
-
-function showStudentsFavoriteLessons(...student) {
-	var lessons = ['Математика', 'История', 'Спорт', 'Литература', 'Биология', 'География']
-	var students = Array.from(student)
-
-	function checkStudentFavoriteLessons(students) {
-		for (var i = 0; i < students.length; i++) {
-			var n = Math.floor(Math.random() * lessons.length);
-			var favoriteLessons = lessons.splice(-n)
-			if (favoriteLessons.length > 0) {
-				console.log(`${students[i]}: ${favoriteLessons}`)
-			} else {
-				console.log(`${students[i]}: У этого студента нет любимых предметов`)
-			}
-		}
-	}
-	checkStudentFavoriteLessons(students)
-}
 showStudentsFavoriteLessons('Артур', 'Жуня', 'Костя', 'Маша', 'Денис')
+
+function showStudentsFavoriteLessons() {
+	for (var i = 0; i < arguments.length ; i++) {
+			console.log(checkStudentFavoriteLessons(arguments[i]))
+	}
+}
+
+function checkStudentFavoriteLessons(studentName) {
+	var lessons = ['Mathematics', 'History', 'Sports','Literature','Biology','Geography']
+	var lessonsCount = Math.floor(Math.random() * lessons.length)
+	var favoriteLessons = lessons.slice(lessonsCount * -1)
+
+	if (!lessonsCount) { 
+			return `${studentName}: This student has no favorite lessons`
+	}
+	return `${studentName}: ${favoriteLessons.join(', ')}`
+}
